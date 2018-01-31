@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qsy.demo.shiro.entity.GoodsInfo;
+import com.qsy.demo.shiro.entity.GoodsInfoExample;
 import com.qsy.demo.shiro.entity.GoodsSortRelation;
 import com.qsy.demo.shiro.entity.mapper.GoodsInfoMapper;
 import com.qsy.demo.shiro.entity.mapper.GoodsSortRelationMapper;
@@ -32,12 +33,8 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 	@Override
 	public Map<String, Object> goodsInfoList(GoodsInfoParam param) {
 		Map<String, Object> result = new HashMap<>();
-		List<GoodsInfo> goodsInfos =  goodsInfoMapper.selectByGoodsCondition(param);
-		Integer count = count(param);
-		Integer pages =pages(count, param.getPageSize());
-		result.put("goodsInfos", goodsInfos);
-		result.put("count", count);
-		result.put("pages", pages);
+		List<GoodsInfoOperation> list = goodsInfoMapper.selectByCondition(param);
+		result.put("goodsInfos", list);
 		return result;
 		
 	}
@@ -47,9 +44,6 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 	 * @param param
 	 * @return
 	 */
-	protected Integer count(GoodsInfoParam param) {
-		return goodsInfoMapper.selectCountByGoodsCondition(param);
-	}
 	
 	/**
 	 * 获取分页总数

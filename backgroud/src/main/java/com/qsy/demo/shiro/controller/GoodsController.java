@@ -1,10 +1,14 @@
 package com.qsy.demo.shiro.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -69,5 +73,21 @@ public class GoodsController {
 		}else {
 			return addGoodsInfo(goodsInfo);
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteGoodsInfoAll")
+	public String deleteGoodsInfoAll(String ids) {
+		List<Integer> list = new ArrayList<>();
+		String result = "删除失败！";
+		if(ids!=null&&!"".equals(ids)) {
+			String[] idList = ids.split(",");
+			for (String idString : idList) {
+				list.add(Integer.parseInt(idString));
+			}
+			result = goodsInfoService.deleteGoodsInfoAll(list);
+		}
+		return result;
+		
 	}
 }

@@ -30,10 +30,48 @@
 			</div>
 			<div class="row">
 				<div class="col-md-1"></div>
-			 	<div class="col-md-8">列表信息</div>
+			 	<div class="col-md-8">
+			 		<div class="row">
+			 			<div class="col-md-1">
+					 		<label for="search">SEARCH</label>
+					 	</div>
+					 	<div class="col-md-3">
+					 		<input class="form-control" type="text"/>
+					 	</div>
+					 	<div class="col-md-6">
+					 		<div class="row">
+							  <div class="col-md-12">
+							    <div class="input-group">
+							      <div class="input-group-btn">
+							        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+							        <ul class="dropdown-menu">
+							          <li><a href="#">Action</a></li>
+							          <li><a href="#">Another action</a></li>
+							          <li><a href="#">Something else here</a></li>
+							          <li role="separator" class="divider"></li>
+							          <li><a href="#">Separated link</a></li>
+							        </ul>
+							      </div>
+							      <div class="row">
+							   		   <div class="col-md-5">
+							   		   		<input type="text" class="form-control" aria-label="...">
+							   		   </div>
+								      <div class="col-md-1">
+							   		   		<span style="font-size: x-large;">-</span>
+							   		   </div>
+							   		   <div class="col-md-5">
+							   		   		<input type="text" class="form-control" aria-label="...">
+							   		   </div>
+							      </div>
+							    </div>
+							  </div>
+							 </div>
+					 	</div>
+				 	</div>
+			 	</div>
   				<div class="col-md-2">
   					<button type="button" class="btn btn btn-info btn-primary btn-sm goodsInfo" genre = "addInfo">添加</button>
-					<button type="button" class="btn btn btn-warning btn-primary btn-sm">删除</button>
+					<button type="button" class="btn btn btn-warning btn-primary btn-sm" id="deleteGoodsInfoAll">删除</button>
   				</div>
 			</div>
 			<div class="row">
@@ -41,7 +79,7 @@
 				<div class="col-md-10">
 					<table class="table table-hover">
 						<thead>
-							<th></th>
+							<th><input id="deleteAll" type="checkbox"/></th>
 							<th>名称</th>
 							<th>描述</th>
 							<th>图片</th>
@@ -55,7 +93,7 @@
 						<c:if test="${not empty goodsInfos}">
 							<c:forEach items="${goodsInfos}" var="goods">
 								<tr>
-									<td><input type="checkbox"/></td>
+									<td><input class="deleteOne" type="checkbox" value="${goods.goodsId}"/></td>
 									<td>${goods.goodsName}</td>
 									<td>${goods.goodsDesc}</td>
 									<td>${goods.goodsImage}</td>

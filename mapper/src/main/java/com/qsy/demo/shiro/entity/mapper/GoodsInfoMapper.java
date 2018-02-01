@@ -104,4 +104,6 @@ public interface GoodsInfoMapper {
 	List<GoodsInfoOperation> selectByCondition(GoodsInfoParam param);
 
 	Integer selectCountByCondition(GoodsInfoParam param);
+
+	void deleteGoodsInfoAll(List<Integer> list);
 }

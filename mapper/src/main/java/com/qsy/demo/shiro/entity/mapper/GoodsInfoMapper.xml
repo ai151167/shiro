@@ -307,8 +307,7 @@
 		where GOODS_ID = #{goodsId,jdbcType=INTEGER}
 	</update>
 
-	<select id="goodsInfo" parameterType="java.lang.Integer"
-		resultMap="goodsInfo">
+	<select id="goodsInfo" parameterType="java.lang.Integer" resultMap="goodsInfo">
 		SELECT 
 		<include refid="goodsInfoSql"/>
 		FROM 
@@ -357,8 +356,10 @@
 		sort_info S
 		LEFT JOIN 
 		goods_sort_relation R ON S.SORT_ID = R.SORT_ID) A
-		WHERE G.GOODS_ID = A.GOODS_ID
+		WHERE G.GOODS_ID = A.GOODS_ID 
+		AND G.GOODS_STATE = '01'
 	</select>
+	
 	<select id="selectCountByCondition" parameterType="com.qsy.demo.shiro.entity.vo.GoodsInfoParam" resultType="java.lang.Integer">
 		SELECT 
 		count(*)
@@ -370,5 +371,13 @@
 		LEFT JOIN 
 		goods_sort_relation R ON S.SORT_ID = R.SORT_ID) A
 		WHERE G.GOODS_ID = A.GOODS_ID
+		AND G.GOODS_STATE = '01'
 	</select>
+	
+	<update id="deleteGoodsInfoAll" parameterType="java.util.List">
+        update goods_info SET GOODS_STATE = "00" WHERE GOODS_ID IN  
+	    <foreach collection="list" item="item" index="index" open="(" separator="," close=")" >  
+	        #{item}  
+	    </foreach>   
+	</update>
 </mapper>

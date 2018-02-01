@@ -82,18 +82,25 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 		gInfo.setGoodsPrice(goodsInfo.getGoodsPrice());
 		gInfo.setGoodsState("01");
 		goodsInfoMapper.insert(gInfo);
-		System.out.println(gInfo.getGoodsId());
-		if(gInfo.getGoodsId()>0) {
-			GoodsSortRelation rel = new GoodsSortRelation();
-			rel.setGoodsId(gInfo.getGoodsId());
-			rel.setSortId(sortId);
-			rel.setGoodsSortState("01");
-			goodsSortRelationMapper.insert(rel);
+		
+		if(gInfo.getGoodsId()!=null&&gInfo.getGoodsId()>0) {
+			addGoodsSortRelation(gInfo.getGoodsId(),sortId);
 			return "添加成功!";
 		}
 		return "添加失败!";
 	}
 
+	
+	protected void addGoodsSortRelation(Integer goodsId, Integer sortId) {
+		if(goodsId!=null&&sortId!=null) {
+			GoodsSortRelation rel = new GoodsSortRelation();
+			rel.setGoodsId(goodsId);
+			rel.setSortId(sortId);
+			rel.setGoodsSortState("01");
+			goodsSortRelationMapper.insert(rel);
+		}
+	}
+	
 	/**
 	 * 获取详情
 	 *	QSY
@@ -141,5 +148,11 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 			result = "删除成功!";
 		}
 		return result;
+	}
+
+	@Override
+	public String deleteGoodsInfoAll(List<Integer> list) {
+		goodsInfoMapper.deleteGoodsInfoAll(list);
+		return "删除成功!";
 	}
 }

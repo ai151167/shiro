@@ -33,8 +33,8 @@ $(document).ready(function() {
 		})    
 	    
 	});
+	
 	$("#close").click(function(){
-		alert(1111);
 		$("#sortName").val("");
 		$("#sortId").val("");
 		$("#goodsId").val("");
@@ -44,6 +44,70 @@ $(document).ready(function() {
 		$("#goodsDesc").val("");
 		$("#goodsImage").attr("src","");
 	});
+	
+	$(".goodsInfoDelete").click(function(){
+		var goodsId =  $(this).attr("value");
+		$.ajax({
+			url:"goodsInfo/deleteGoodsInfo",
+			async:true,
+			data:{ 
+			      "goodsId" : goodsId 
+		     },
+			type:"GET",
+			success:function(response){
+				if(response!=null){
+					alert(response);
+				}
+			}
+		});
+	});
+	
+	$("#deleteAll").click(function(){
+		if($("#deleteAll").prop("checked")){
+			$(".deleteOne").prop("checked",true);
+		}else{
+			$(".deleteOne").prop("checked",false);
+		}
+	});
+	
+	$(".deleteOne").click(function(){
+		 if($("input[type='checkbox']:checked").length != $(".deleteOne").length){
+			 $("#deleteAll").prop("checked",false);
+		 }
+		 if($("input[type='checkbox']:checked").length==$(".deleteOne").length)
+		 {
+			 $("#deleteAll").prop("checked",true);
+		 }
+	});
+	
+	$("#deleteGoodsInfoAll").click(function(){
+		var k = $("input[class='deleteOne']:checked"); 
+		if(k.length<=0){
+			 alert("选着要删除的项！");
+			 return ;
+		}
+		if(!confirm("确定要都删除？")){
+			 return ;
+		}
+		var ids = "";
+		for(var i=0;i<k.length;i++){
+			ids += k[i].value+",";
+		}
+		$.ajax({
+			url:"goodsInfo/deleteGoodsInfoAll",
+			async:true,
+			data:{ 
+			      "ids" : ids 
+		     },
+			type:"GET",
+			success:function(response){
+				if(response!=null){
+					alert(response);
+				}
+			}
+		});
+	});
+	
 	loadPageNumber(1);
 });
 function loadPageNumber(startPage) {

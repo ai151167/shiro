@@ -1,5 +1,3 @@
-var page = 1;
-var count = 1;
 $(document).ready(function() {
 	
 	$(".goodsInfo").click(function(){
@@ -17,12 +15,40 @@ $(document).ready(function() {
 	});
 	
 	$('#save').on('click', function () {
-		    var $btn = $(this).button('loading')
-		    $btn.button('reset')
+		alert($("#gridSystemModalLabel").html());
+	    var param =	$("#goodsInfoForm").serialize();
+	    var $btn = $(this).button('loading')
+	    $btn.button('reset');
+		$.ajax({
+			type:"POST",
+			url:"goodsInfo/saveGoodsInfo",
+			data:param,
+			success:function(msg){
+				if(msg!=null){
+					alert(msg);
+				}else{
+					alert("保存失败!");
+				}
+			}
+		})    
+	    
+	});
+	$("#close").click(function(){
+		alert(1111);
+		$("#sortName").val("");
+		$("#sortId").val("");
+		$("#goodsId").val("");
+		$("#goodsName").val("");
+		$("#goodsPrice").val("");
+		$("#goodsCount").val("");
+		$("#goodsDesc").val("");
+		$("#goodsImage").attr("src","");
 	});
 	loadPageNumber(1);
 });
 function loadPageNumber(startPage) {
+	var page = $("#pages").val();
+	var count = $("#count").attr("value");
 	$("#page").empty();
 	$("#page").paging({
 	    pageNo:startPage,
@@ -43,14 +69,14 @@ function loadGoodsInfo(goodsId){
 		type:"GET",
 		success:function(response){
 			if(response!=null){
-				$("#sortName").val();
-				$("#sortId").val();
-				$("#sortName").val();
-				$("#sortName").val();
-				$("#sortName").val();
-				$("#sortName").val();
-				$("#sortName").val();
-				$("#sortName").val();
+				$("#sortName").val(response.sortName);
+				$("#sortId").val(response.sortId);
+				$("#goodsId").val(response.goodsId);
+				$("#goodsName").val(response.goodsName);
+				$("#goodsPrice").val(response.goodsPrice);
+				$("#goodsCount").val(response.goodsCount);
+				$("#goodsDesc").val(response.goodsDesc);
+				$("#goodsImage").attr("src",response.goodsImage);
 			}
 		}
 	});

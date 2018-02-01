@@ -41,6 +41,7 @@
 				<div class="col-md-10">
 					<table class="table table-hover">
 						<thead>
+							<th></th>
 							<th>名称</th>
 							<th>描述</th>
 							<th>图片</th>
@@ -54,6 +55,7 @@
 						<c:if test="${not empty goodsInfos}">
 							<c:forEach items="${goodsInfos}" var="goods">
 								<tr>
+									<td><input type="checkbox"/></td>
 									<td>${goods.goodsName}</td>
 									<td>${goods.goodsDesc}</td>
 									<td>${goods.goodsImage}</td>
@@ -76,16 +78,12 @@
 							</tr>
 						</tfoot>
 					</table>
-					<input type="text" id="count" value="${count}">
-					<input type="text" id="pages" value="${pages}">
+					<input type="hidden" id="count" value="${count}">
+					<input type="hidden" id="pages" value="${pages}">
 				</div>
 			</div>
 		</div>
 
-		<p>
-			<a class="btn btn-lg btn-success" href="#" role="button">Get
-				started today</a>
-		</p>
 	</div>
 	<!-- 模态 -->
 		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="info">
@@ -96,58 +94,58 @@
 		        <h4 class="modal-title" id="gridSystemModalLabel"></h4>
 		      </div>
 		      <div class="modal-body">
-			       <form>
-			       <input type="hidden" id="goodsId" name="goodsId">
-					<div class="row">
-						  <div class="col-xs-5 col-md-offset-1">
-						  <label for="sortInfo">SORT_INFO</label>
-						 	 <div class="row">
-						 	 	<div class="col-xs-7">
-						 	 		<input type="text" class="form-control" id="sortName"  readonly="readonly">
-						 	 		<input type="hidden" id="sortId">
-						 	 	</div>
-						 	 	<div class="col-xs-5">
-						 	 		<button class="form-control" onclick="SortTreeLayer()">选择</button>
-						 	 	</div>
-					          </div>
+			       <form id="goodsInfoForm">
+				       <input type="hidden" id="goodsId" name="goodsId">
+						<div class="row">
+							  <div class="col-xs-5 col-md-offset-1">
+							  <label for="sortInfo">SORT_INFO</label>
+							 	 <div class="row">
+							 	 	<div class="col-xs-7">
+							 	 		<input type="text" class="form-control" id="sortName"  readonly="readonly">
+							 	 		<input type="hidden" id="sortId">
+							 	 	</div>
+							 	 	<div class="col-xs-5">
+							 	 		<button class="form-control" onclick="SortTreeLayer()">选择</button>
+							 	 	</div>
+						          </div>
+							  </div>
+							  <div class="col-xs-5">
+							  <label for="goodsName">GOODS_NAME</label>
+							    <input type="text" class="form-control" id="goodsName" placeholder="GOODS_NAME" name = "goodsName">
+							  </div>
+						</div>
+						<div class="row">
+							  <div class="col-xs-5 col-md-offset-1">
+							  <label for="goodsPrice">GOODS_PRICE</label>
+							    <input type="text" class="form-control" id="goodsPrice" placeholder="GOODS_PRICE" name = "goodsPrice">
+							  </div>
+							  <div class="col-xs-5">
+							  <label for="goodsCount">GOODS_COUNT</label>
+							    <input type="text" class="form-control" id="goodsCount" placeholder="GOODS_COUNT" name = "goodsCount">
+							  </div>
+						</div>
+						<div class="row">
+							  <div class="col-xs-10 col-md-offset-1">
+							 	 <label for="goodsDesc">GOODS_DESC</label>
+							 	 <textarea class="form-control" rows="2" id="goodsDesc" name="goodsDesc"></textarea>
+							  </div>
+						</div>
+						<div class="row">
+							  <div class="col-xs-10 col-md-offset-1">
+							 	 <label for="goodsImage">GOODS_IMAGE</label>
+							 	 <img src="..." class="img-responsive" alt="Responsive image" id="goodsImage" name="goodsImage">
+							  </div>
+						</div>
+						  <div class="form-group row">
+							  <div class="col-xs-5 col-md-offset-1">
+							    <label for="exampleInputFile">图片</label>
+							    <input type="file" id="exampleInputFile">
+							   </div>
 						  </div>
-						  <div class="col-xs-5">
-						  <label for="goodsName">GOODS_NAME</label>
-						    <input type="text" class="form-control" id="goodsName" placeholder="GOODS_NAME" name = "goodsName">
-						  </div>
-					</div>
-					<div class="row">
-						  <div class="col-xs-5 col-md-offset-1">
-						  <label for="goodsPrice">GOODS_PRICE</label>
-						    <input type="text" class="form-control" id="goodsPrice" placeholder="GOODS_PRICE" name = "goodsPrice">
-						  </div>
-						  <div class="col-xs-5">
-						  <label for="goodsCount">GOODS_COUNT</label>
-						    <input type="text" class="form-control" id="goodsCount" placeholder="GOODS_COUNT" name = "goodsCount">
-						  </div>
-					</div>
-					<div class="row">
-						  <div class="col-xs-10 col-md-offset-1">
-						 	 <label for="goodsDesc">GOODS_DESC</label>
-						 	 <textarea class="form-control" rows="2" id="goodsDesc" name="goodsDesc"></textarea>
-						  </div>
-					</div>
-					<div class="row">
-						  <div class="col-xs-10 col-md-offset-1">
-						 	 <label for="goodsImage">GOODS_IMAGE</label>
-						 	 <img src="..." class="img-responsive" alt="Responsive image" id="goodsImage" name="goodsImage">
-						  </div>
-					</div>
-					  <div class="form-group row">
-						  <div class="col-xs-5 col-md-offset-1">
-						    <label for="exampleInputFile">图片</label>
-						    <input type="file" id="exampleInputFile">
-						   </div>
-					  </div>
 					</form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
 		        <button type="button" id="save" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">Save</button>
 		      </div>
 		    </div><!-- /.modal-content -->

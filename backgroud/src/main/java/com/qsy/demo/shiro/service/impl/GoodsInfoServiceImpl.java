@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qsy.demo.shiro.entity.GoodsInfo;
-import com.qsy.demo.shiro.entity.GoodsInfoExample;
 import com.qsy.demo.shiro.entity.GoodsSortRelation;
 import com.qsy.demo.shiro.entity.mapper.GoodsInfoMapper;
 import com.qsy.demo.shiro.entity.mapper.GoodsSortRelationMapper;
@@ -34,7 +33,11 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 	public Map<String, Object> goodsInfoList(GoodsInfoParam param) {
 		Map<String, Object> result = new HashMap<>();
 		List<GoodsInfoOperation> list = goodsInfoMapper.selectByCondition(param);
+		Integer count = count(param);
+		Integer pages = pages(count, param.getPageSize());
 		result.put("goodsInfos", list);
+		result.put("count", count);
+		result.put("pages", pages);
 		return result;
 		
 	}
@@ -44,6 +47,9 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 	 * @param param
 	 * @return
 	 */
+	protected Integer count(GoodsInfoParam param) {
+		return goodsInfoMapper.selectCountByCondition(param);
+	}
 	
 	/**
 	 * 获取分页总数
@@ -64,11 +70,22 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 	 */
 	@Override
 	public String addGoodsInfo(GoodsInfoOperation goodsInfo) {
-		Integer sortId = goodsInfo.getSortId();
-		Integer goodsId = goodsInfoMapper.addGoodsInfo(goodsInfo);
-		if(goodsId>0) {
+		Integer sortId = 1;
+		if(goodsInfo.getSortId()!=null&&!"".equals(goodsInfo.getSortId().toString())) {
+			sortId = goodsInfo.getSortId();
+		}
+		GoodsInfo gInfo = new GoodsInfo();
+		gInfo.setGoodsCount(goodsInfo.getGoodsCount());
+		gInfo.setGoodsDesc(goodsInfo.getGoodsDesc());
+		gInfo.setGoodsImage(goodsInfo.getGoodsImage());
+		gInfo.setGoodsName(goodsInfo.getGoodsName());
+		gInfo.setGoodsPrice(goodsInfo.getGoodsPrice());
+		gInfo.setGoodsState("01");
+		goodsInfoMapper.insert(gInfo);
+		System.out.println(gInfo.getGoodsId());
+		if(gInfo.getGoodsId()>0) {
 			GoodsSortRelation rel = new GoodsSortRelation();
-			rel.setGoodsId(goodsId);
+			rel.setGoodsId(gInfo.getGoodsId());
 			rel.setSortId(sortId);
 			rel.setGoodsSortState("01");
 			goodsSortRelationMapper.insert(rel);

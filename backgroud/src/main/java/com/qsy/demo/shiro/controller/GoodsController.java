@@ -34,11 +34,12 @@ public class GoodsController {
 	public String goodsInfoList(GoodsInfoParam param,ModelMap map) {
 		Map<String, Object> result = goodsInfoService.goodsInfoList(param);
 		map.put("goodsInfos", result.get("goodsInfos"));
+		map.put("count", result.get("count"));
+		map.put("pages", result.get("pages"));
 		return "goods/goods";
 	}
 
-	@ResponseBody
-	@RequestMapping("/addGoodsInfo")
+	
 	public String addGoodsInfo(GoodsInfoOperation goodsInfo) {
 		return goodsInfoService.addGoodsInfo(goodsInfo);
 	}
@@ -49,8 +50,7 @@ public class GoodsController {
 		return goodsInfoService.goodsInfo(goodsId);
 	}
 
-	@ResponseBody
-	@RequestMapping("/updateGoodsInfo")
+	
 	public String updateGoodsInfo(GoodsInfoOperation goodsInfo) {
 		return goodsInfoService.updateGoodsInfo(goodsInfo);
 	}
@@ -59,5 +59,15 @@ public class GoodsController {
 	@RequestMapping("/deleteGoodsInfo")
 	public String deleteGoodsInfo(Integer goodsId) {
 		return goodsInfoService.deleteGoodsInfo(goodsId);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/saveGoodsInfo")
+	public String saveGoodsInfo(GoodsInfoOperation goodsInfo) {
+		if(goodsInfo!=null&&goodsInfo.getGoodsId()!=null&&!"".equals(goodsInfo.getGoodsId().toString())) {
+			return updateGoodsInfo(goodsInfo);
+		}else {
+			return addGoodsInfo(goodsInfo);
+		}
 	}
 }

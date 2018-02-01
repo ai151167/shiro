@@ -97,11 +97,11 @@ public interface GoodsInfoMapper {
      */
     int updateByPrimaryKey(GoodsInfo record);
     
-	Integer addGoodsInfo(GoodsInfoOperation goodsInfo);
-
 	GoodsInfoOperation goodsInfo(Integer goodsId);
 
 	void updateGoodsInfo(GoodsInfoOperation goodsInfo);
 
 	List<GoodsInfoOperation> selectByCondition(GoodsInfoParam param);
+
+	Integer selectCountByCondition(GoodsInfoParam param);
 }

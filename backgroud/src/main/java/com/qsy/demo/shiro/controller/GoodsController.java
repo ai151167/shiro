@@ -1,10 +1,14 @@
 package com.qsy.demo.shiro.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,11 +38,12 @@ public class GoodsController {
 	public String goodsInfoList(GoodsInfoParam param,ModelMap map) {
 		Map<String, Object> result = goodsInfoService.goodsInfoList(param);
 		map.put("goodsInfos", result.get("goodsInfos"));
+		map.put("count", result.get("count"));
+		map.put("pages", result.get("pages"));
 		return "goods/goods";
 	}
 
-	@ResponseBody
-	@RequestMapping("/addGoodsInfo")
+	
 	public String addGoodsInfo(GoodsInfoOperation goodsInfo) {
 		return goodsInfoService.addGoodsInfo(goodsInfo);
 	}
@@ -49,8 +54,7 @@ public class GoodsController {
 		return goodsInfoService.goodsInfo(goodsId);
 	}
 
-	@ResponseBody
-	@RequestMapping("/updateGoodsInfo")
+	
 	public String updateGoodsInfo(GoodsInfoOperation goodsInfo) {
 		return goodsInfoService.updateGoodsInfo(goodsInfo);
 	}
@@ -59,5 +63,31 @@ public class GoodsController {
 	@RequestMapping("/deleteGoodsInfo")
 	public String deleteGoodsInfo(Integer goodsId) {
 		return goodsInfoService.deleteGoodsInfo(goodsId);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/saveGoodsInfo")
+	public String saveGoodsInfo(GoodsInfoOperation goodsInfo) {
+		if(goodsInfo!=null&&goodsInfo.getGoodsId()!=null&&!"".equals(goodsInfo.getGoodsId().toString())) {
+			return updateGoodsInfo(goodsInfo);
+		}else {
+			return addGoodsInfo(goodsInfo);
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteGoodsInfoAll")
+	public String deleteGoodsInfoAll(String ids) {
+		List<Integer> list = new ArrayList<>();
+		String result = "删除失败！";
+		if(ids!=null&&!"".equals(ids)) {
+			String[] idList = ids.split(",");
+			for (String idString : idList) {
+				list.add(Integer.parseInt(idString));
+			}
+			result = goodsInfoService.deleteGoodsInfoAll(list);
+		}
+		return result;
+		
 	}
 }

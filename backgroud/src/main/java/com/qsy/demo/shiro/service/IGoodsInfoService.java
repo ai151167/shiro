@@ -1,5 +1,6 @@
 package com.qsy.demo.shiro.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.qsy.demo.shiro.entity.vo.GoodsInfoOperation;
@@ -17,5 +18,7 @@ public interface IGoodsInfoService {
 	String updateGoodsInfo(GoodsInfoOperation goodsInfo);
 
 	String deleteGoodsInfo(Integer goodsId);
+
+	String deleteGoodsInfoAll(List<Integer> list);
 
 }

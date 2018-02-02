@@ -33,45 +33,44 @@
 			 	<div class="col-md-8">
 			 		<div class="row">
 			 			<div class="col-md-1">
-					 		<label for="search">SEARCH</label>
+					 		<label for="searchInfo">SEARCH</label>
 					 	</div>
 					 	<div class="col-md-3">
-					 		<input class="form-control" type="text"/>
+					 		<input class="form-control" id="searchInfo" placeholder="searchInfo" name="" type="text"/>
 					 	</div>
 					 	<div class="col-md-6">
 					 		<div class="row">
 							  <div class="col-md-12">
 							    <div class="input-group">
 							      <div class="input-group-btn">
-							        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+							        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">选择 <span class="caret"></span></button>
 							        <ul class="dropdown-menu">
-							          <li><a href="#">Action</a></li>
-							          <li><a href="#">Another action</a></li>
-							          <li><a href="#">Something else here</a></li>
-							          <li role="separator" class="divider"></li>
-							          <li><a href="#">Separated link</a></li>
+							          <li><a class="price">0--100</a></li>
+							          <li><a class="price">100--200</a></li>
+							          <li><a class="price">200--300</a></li>
 							        </ul>
 							      </div>
 							      <div class="row">
 							   		   <div class="col-md-5">
-							   		   		<input type="text" class="form-control" aria-label="...">
+							   		   		<input type="text" class="form-control"  id ="lowPrice" name ="lowPrice" placeholder="lowPrice">
 							   		   </div>
 								      <div class="col-md-1">
-							   		   		<span style="font-size: x-large;">-</span>
+							   		   		<span style="font-size: x-large;">━</span>
 							   		   </div>
 							   		   <div class="col-md-5">
-							   		   		<input type="text" class="form-control" aria-label="...">
+							   		   		<input type="text" class="form-control" id="tallPrice" name="tallPrice" placeholder="tallPrice">
 							   		   </div>
 							      </div>
 							    </div>
 							  </div>
 							 </div>
 					 	</div>
+					 	<button type="button" class="btn btn btn-primary btn-sm" id="searchs">搜索</button>
 				 	</div>
 			 	</div>
   				<div class="col-md-2">
-  					<button type="button" class="btn btn btn-info btn-primary btn-sm goodsInfo" genre = "addInfo">添加</button>
-					<button type="button" class="btn btn btn-warning btn-primary btn-sm" id="deleteGoodsInfoAll">删除</button>
+  					<button type="button" class="btn btn btn-info btn-sm goodsInfo" genre = "addInfo">添加</button>
+					<button type="button" class="btn btn btn-warning btn-sm" id="deleteGoodsInfoAll">删除</button>
   				</div>
 			</div>
 			<div class="row">
@@ -136,16 +135,35 @@
 				       <input type="hidden" id="goodsId" name="goodsId">
 						<div class="row">
 							  <div class="col-xs-5 col-md-offset-1">
-							  <label for="sortInfo">SORT_INFO</label>
+							  <label for="sortName">SORT_INFO</label>
 							 	 <div class="row">
-							 	 	<div class="col-xs-7">
-							 	 		<input type="text" class="form-control" id="sortName"  readonly="readonly">
-							 	 		<input type="hidden" id="sortId">
-							 	 	</div>
 							 	 	<div class="col-xs-5">
-							 	 		<button class="form-control" onclick="SortTreeLayer()">选择</button>
-							 	 	</div>
-						          </div>
+								 	 	<div class="input-group-btn">
+									       	 <button type="button" class="btn btn-default dropdown-toggle "  id="sortInfoChange">选择 <span class="caret"></span></button>
+									      	  <ul class="dropdown-menu" id="sortInfo">
+									      	  	 <li><a class="sortInfo">暂无分类</a>
+									      	  	 	<ul>
+												
+												        <li><a href="#">二级栏目</a></li>
+												
+												        <li><a href="#">二级栏目</a></li>
+												
+												        <li><a href="#">二级栏目</a></li>
+												
+												        <li><a href="#">二级栏目</a></li>
+												
+												      </ul>
+									      	  	 </li>
+									         	 <li><a class="sortInfo"  genre="${li_sortId}">${li_sortName}</a></li>
+									      	  </ul>
+								      	</div>
+								    </div>	
+								    <div class="col-xs-7">
+							 	 		<input type="text" class="form-control" id="sortName" name="sortName" value="${sortName }" readonly="readonly">
+							 	 		<input type="hidden" id="sortId" name="sortId" value="${sortId}"/>
+							 	    </div>
+							 	 	
+						         </div>
 							  </div>
 							  <div class="col-xs-5">
 							  <label for="goodsName">GOODS_NAME</label>
@@ -198,6 +216,5 @@
 	<script src="/js/zTree/js/jquery.ztree.core.js"></script>
 	<script src="/js/layer/layer.min.js"></script>
 	<script src="/js/jquery-easyui/jquery.easyui.min.js"></script>
-	<script src="/js/views/tree/sortTree.js"></script>
 </body>
 </html>

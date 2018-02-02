@@ -108,6 +108,14 @@ $(document).ready(function() {
 		});
 	});
 	
+	$("#sortInfoChange").click(function(){
+		console.log(1111);
+	});
+	
+	$('#searchs').on('click', function () {
+		alert(111);
+	});
+	
 	loadPageNumber(1);
 });
 function loadPageNumber(startPage) {

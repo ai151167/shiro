@@ -110,6 +110,20 @@ $(document).ready(function() {
 	
 	$("#sortInfoChange").click(function(){
 		console.log(1111);
+		var sb = ""
+			sb+="<div id='J_cate' class='cate J_cate'>";
+			sb+="<ul class='JS_navCtn cate_menu'>";
+		sb+="<li class='cate_menu_item' data-index='1' clstag='h|keycount|head|category_01a'>";
+		sb+="<a target='_blank' class='cate_menu_lk' href='//jiadian.jd.com'>家用电器</a>";
+		sb+="</li>";
+		sb+="<li class='cate_menu_item' data-index='2' clstag='h|keycount|head|category_02a'>";
+		sb+="<a target='_blank' class='cate_menu_lk' href='//shouji.jd.com/'>手机</a>";
+		sb+="</li>";
+		sb+="</ul>";
+		sb+="<div id='J_popCtn' class='JS_popCtn cate_pop mod_loading' style='display: none;'></div>";
+		sb+="</div>";
+		$("#sortInfo").html(sb);
+		alert(sb);
 	});
 	
 	$('#searchs').on('click', function () {

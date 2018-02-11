@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qsy.demo.shiro.common.resultbean.ResultBean;
 import com.qsy.demo.shiro.entity.vo.GoodsInfoOperation;
 import com.qsy.demo.shiro.entity.vo.GoodsInfoParam;
 import com.qsy.demo.shiro.service.IGoodsInfoService;
@@ -44,19 +43,19 @@ public class GoodsController {
 	}
 
 	
-	public String addGoodsInfo(GoodsInfoOperation goodsInfo) {
-		return goodsInfoService.addGoodsInfo(goodsInfo);
+	public ResultBean<String> addGoodsInfo(GoodsInfoOperation goodsInfo) {
+		return new ResultBean<>(goodsInfoService.addGoodsInfo(goodsInfo));
 	}
 
 	@ResponseBody
 	@RequestMapping("/goodsInfo")
-	public GoodsInfoOperation goodsInfo(Integer goodsId) {
-		return goodsInfoService.goodsInfo(goodsId);
+	public ResultBean<GoodsInfoOperation> goodsInfo(Integer goodsId) {
+		return new ResultBean<>( goodsInfoService.goodsInfo(goodsId));
 	}
 
 	
-	public String updateGoodsInfo(GoodsInfoOperation goodsInfo) {
-		return goodsInfoService.updateGoodsInfo(goodsInfo);
+	public ResultBean<String> updateGoodsInfo(GoodsInfoOperation goodsInfo) {
+		return new ResultBean<>(goodsInfoService.updateGoodsInfo(goodsInfo));
 	}
 
 	@ResponseBody
@@ -67,7 +66,7 @@ public class GoodsController {
 	
 	@ResponseBody
 	@RequestMapping("/saveGoodsInfo")
-	public String saveGoodsInfo(GoodsInfoOperation goodsInfo) {
+	public ResultBean<String> saveGoodsInfo(GoodsInfoOperation goodsInfo) {
 		if(goodsInfo!=null&&goodsInfo.getGoodsId()!=null&&!"".equals(goodsInfo.getGoodsId().toString())) {
 			return updateGoodsInfo(goodsInfo);
 		}else {

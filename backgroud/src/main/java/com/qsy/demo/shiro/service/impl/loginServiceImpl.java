@@ -26,6 +26,7 @@ public class loginServiceImpl implements ILoginService {
 		List<User> byExample = userMapper.selectByExample(example);
 		if(byExample!=null&&byExample.size()>0) {
 			if(user.getUserPassword().equals(byExample.get(0).getUserPassword())) {
+				result.put("user", byExample.get(0));
 				result.put("SUCCESS", true);
 				result.put("MSG", "登录成功!");
 			}else {

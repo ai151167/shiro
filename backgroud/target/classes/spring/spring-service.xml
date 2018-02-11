@@ -10,4 +10,12 @@
 
 	<!-- 配置包扫描器，扫描@Service的类 -->
 	<context:component-scan base-package="com.qsy.demo.shiro" />
+	<aop:aspectj-autoproxy/>
+	<bean id="controllerAop" class="com.qsy.demo.shiro.common.aop.ControllerAop"></bean>
+	<aop:config>
+		<aop:aspect id="resultAop" ref="controllerAop">
+			<aop:pointcut expression="execution(public com.qsy.demo.shiro.common.resultbean.ResultBean *(..))" id="target"/>
+			<aop:around method="handlerControllerMethod" pointcut-ref="target"/>
+		</aop:aspect>
+	</aop:config>
 </beans>

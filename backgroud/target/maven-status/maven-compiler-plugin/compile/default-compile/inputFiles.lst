@@ -2,9 +2,11 @@ F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\IGoo
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\ILoginService.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\impl\loginServiceImpl.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\controller\LoginController.java
+F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\impl\UserServiceImpl.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\ISortInfoService.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\controller\GoodsController.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\controller\UserController.java
+F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\IUserService.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\controller\SortController.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\impl\GoodsInfoServiceImpl.java
 F:\demo\Repository\shiro\backgroud\src\main\java\com\qsy\demo\shiro\service\impl\SortInfoServiceImpl.java
